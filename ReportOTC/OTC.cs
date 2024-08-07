@@ -12,6 +12,17 @@ namespace ReportOTC
 {
     public class OTC
     {
+        public async Task<string> GetJsonReportList(String otc)
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(AppSettings.URL_HOST);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new
+            MediaTypeWithQualityHeaderValue("application/json"));
+            String url = String.Format("api/RepositoryItems?otc={0}&parentItemId={1}", otc,
+            Guid.Empty.ToString());
+            return await client.GetStringAsync(url);
+        }
         public async Task<string> getOneTimeCode()
         {
             //this user should be a trusted user in the reporting api

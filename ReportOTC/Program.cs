@@ -15,6 +15,12 @@ namespace ReportOTC
             Task.Run(async () => {
                 var data = await otc.getOneTimeCode();
                 Console.WriteLine(data);
+
+                if (data != null)
+                {
+                    var reports = await otc.GetJsonReportList(data);
+                    Console.WriteLine(reports);
+                }
             });
 
             Console.ReadKey();
